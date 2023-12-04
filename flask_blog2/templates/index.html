@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Users List</h1>
+    {% for user in users %}
+        <div class="user">    
+             <p class="name">{{ user.username }}</p>
+             <p>{{ user.email }}</p>
+             <p>{{ user.image_file }}</p>
+
+             <img class="rounded-circle account-img" src="{{ image_file }}">
+        <hr>
+        </div>
+    {% endfor %}
+
+    <div class="pagination">
+        {# ページネーションコントロールの表示 #}
+        <span>Page {{ users.page }} of {{ users.pages }}.</span>
+        {% if users.has_prev %}
+            <a href="{{ url_for('main.index', page=users.prev_num) }}">previous</a>
+        {% endif %}
+        {% if users.has_next %}
+            <a href="{{ url_for('main.index', page=users.next_num) }}">next</a>
+        {% endif %}
+    </div>
+{% endblock content %}
+
